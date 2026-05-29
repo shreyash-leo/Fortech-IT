@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import TechnologyStack from "@/components/TechnologyStack";
+import OurProcess from "@/components/OurProcess";
 
 export default function HomePage() {
   return (
@@ -519,6 +520,7 @@ export default function HomePage() {
   </div>
 </section>
 <TechnologyStack />
+<OurProcess />
     </>
   );
 }
