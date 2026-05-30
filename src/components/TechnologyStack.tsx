@@ -56,21 +56,29 @@ const technologies = [
   },
 ];
 
+// ===================================================
+// DESIGN SYSTEM CONSTANTS
+// ===================================================
+// Container: max-w-[1600px] mx-auto
+// Mobile padding: px-5 (20px)
+// Tablet padding: sm:px-8 (32px)
+// Desktop padding: md:px-10 (40px)
+// Large Desktop: lg:px-12 (48px)
+// Ultra Wide: xl:px-16 (64px)
+//
+// Section Spacing: py-24 (96px)
+// ===================================================
 
 export default function TechnologyStack() {
   return (
-    <section className="relative bg-black py-32 overflow-hidden">
-
+    <section className="relative bg-black py-24 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_50%)]" />
 
       <div className="relative z-10">
-
-        {/* Header */}
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20 mb-20">
-
+        {/* Header - Uses standardized container */}
+        <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 md:px-10 lg:px-12 xl:px-16 mb-20">
           <div className="flex justify-between items-start">
-
             <div>
               <p className="text-white/70 text-sm mb-4">
                 ● Technology Foundation
@@ -89,11 +97,10 @@ export default function TechnologyStack() {
             <span className="hidden lg:block text-[180px] font-bold text-white/5 leading-none">
               09
             </span>
-
           </div>
         </div>
 
-        {/* Drag Area */}
+        {/* Drag Area - Horizontal padding standardized */}
         <motion.div
           drag="x"
           dragConstraints={{
@@ -102,8 +109,7 @@ export default function TechnologyStack() {
           }}
           className="cursor-grab active:cursor-grabbing"
         >
-          <div className="flex gap-8 w-max px-6 md:px-12 lg:px-20">
-
+          <div className="flex gap-8 w-max px-5 sm:px-8 md:px-10 lg:px-12 xl:px-16">
             {technologies.map((tech) => (
               <motion.div
                 key={tech.name}
@@ -116,18 +122,14 @@ export default function TechnologyStack() {
                 }}
                 className="group w-[320px] h-[440px] bg-[#0A0A0A] border border-white/10 rounded-[36px] p-8 flex flex-col justify-between hover:border-white/25 transition-all"
               >
-
                 <div>
-
                   {/* Top */}
                   <div className="flex justify-between items-center mb-8">
-
                     <span className="text-white/50 text-sm">
                       Technology
                     </span>
 
                     <div className="flex gap-2">
-
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white text-sm">
                         ×
                       </div>
@@ -135,16 +137,12 @@ export default function TechnologyStack() {
                       <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center text-sm">
                         ↗
                       </div>
-
                     </div>
-
                   </div>
 
                   {/* Logo */}
                   <div className="flex justify-center mb-10">
-
                     <div className="w-40 h-40 rounded-full border border-white/10 bg-white/5 flex items-center justify-center">
-
                       <Image
                         src={tech.logo}
                         alt={tech.name}
@@ -152,9 +150,7 @@ export default function TechnologyStack() {
                         height={90}
                         className="object-contain"
                       />
-
                     </div>
-
                   </div>
 
                   {/* Content */}
@@ -169,17 +165,14 @@ export default function TechnologyStack() {
                   <p className="text-white/50 leading-relaxed">
                     {tech.desc}
                   </p>
-
                 </div>
 
                 {/* Bottom Arrow */}
                 <button className="w-14 h-14 rounded-full border border-white/15 text-white hover:bg-white hover:text-black transition-all">
                   →
                 </button>
-
               </motion.div>
             ))}
-
           </div>
         </motion.div>
 
@@ -189,7 +182,6 @@ export default function TechnologyStack() {
             ← Drag To Explore →
           </p>
         </div>
-
       </div>
     </section>
   );
