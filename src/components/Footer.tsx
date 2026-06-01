@@ -14,7 +14,7 @@ export default function Footer() {
           {/* Left */}
           <div>
             <img
-              src="/footer/team.jpg"
+              src="/images/team.jpg"
               alt="Team"
               className="w-full max-w-[500px] h-[280px] object-cover rounded-[28px]"
             />
@@ -136,19 +136,10 @@ export default function Footer() {
 <div className="flex justify-center items-center pb-4 overflow-hidden">
 
   <h1
-    className="
-    text-center
-    font-black
-    leading-[0.8]
-    tracking-[-0.08em]
-    text-black
-    text-[22vw]
-    whitespace-nowrap
-    select-none
-  "
-  >
-    Fortech
-  </h1>
+  className="text-center font-black leading-[0.8] tracking-[-0.08em] text-black text-[22vw] whitespace-nowrap select-none"
+>
+  Fortech
+</h1>
 
 </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -84,7 +84,6 @@ export default function Navbar() {
       clearTimeout(timeoutRef.current);
     }
     
-    // Get the width of the nav container
     if (navRef.current) {
       setNavWidth(navRef.current.offsetWidth);
     }
@@ -102,16 +101,26 @@ export default function Navbar() {
     <header className="absolute top-8 left-0 right-0 z-50">
       <div className="max-w-[1600px] mx-auto px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/images/logo.png"
-            alt="Logo"
-            width={220}
-            height={88}
-            priority
-            className="h-20 w-auto"
-          />
-        </Link>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            delay: 0.6,
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={220}
+              height={88}
+              priority
+              className="h-20 w-auto"
+            />
+          </Link>
+        </motion.div>
         
         {/* Navigation */}
         <div
@@ -123,41 +132,68 @@ export default function Navbar() {
           }}
           onMouseLeave={handleClose}
         >
-          <nav
-            ref={navRef}
-            className="bg-black/50 backdrop-blur-2xl border border-white/10 rounded-2xl px-2 py-2"
+          {/* Animate width instead of scaleX */}
+          <motion.div
+            initial={{
+              width: 0,
+              opacity: 0,
+            }}
+            animate={{
+              width: "auto",
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.2,
+            }}
+            style={{ overflow: "hidden" }}
           >
-            <ul className="flex items-center gap-1">
-              {navItems.map((item, index) => (
-                <li key={item.label}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => {
-                      if (item.children.length > 0) {
-                        handleOpen(index);
-                      } else {
-                        setOpenIndex(null);
-                      }
+            <nav
+              ref={navRef}
+              className="bg-black/50 backdrop-blur-2xl border border-white/10 rounded-2xl px-2 py-2 whitespace-nowrap"
+            >
+              <ul className="flex items-center gap-1">
+                {navItems.map((item, index) => (
+                  <motion.li
+                    key={item.label}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.5 + (index * 0.05),
+                      duration: 0.4,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
-                    onClick={() => {
-                      if (item.children.length > 0) {
-                        setOpenIndex(
-                          openIndex === index ? null : index
-                        );
-                      }
-                    }}
-                    className={`px-4 py-2 rounded-xl text-sm transition-all duration-300 ${
-                      openIndex === index
-                        ? "bg-white/10 text-white"
-                        : "text-white/80 hover:text-white hover:bg-white/5"
-                    }`}
                   >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+                    <button
+                      type="button"
+                      onMouseEnter={() => {
+                        if (item.children.length > 0) {
+                          handleOpen(index);
+                        } else {
+                          setOpenIndex(null);
+                        }
+                      }}
+                      onClick={() => {
+                        if (item.children.length > 0) {
+                          setOpenIndex(
+                            openIndex === index ? null : index
+                          );
+                        }
+                      }}
+                      className={`px-4 py-2 rounded-xl text-sm transition-all duration-300 ${
+                        openIndex === index
+                          ? "bg-white/10 text-white"
+                          : "text-white/80 hover:text-white hover:bg-white/5"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
+          </motion.div>
 
           <AnimatePresence>
             {openIndex !== null && (
